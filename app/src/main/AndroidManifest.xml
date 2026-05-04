@@ -14,14 +14,22 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.ROTKCompanion">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".CurrentChapterActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+
+            android:parentActivityName=".MainActivity" />
+
+
     </application>
 
 </manifest>
