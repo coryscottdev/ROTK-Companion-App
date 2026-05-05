@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.rotkcompanion.Database.Repository;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -24,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //Starts creating database as soon as app opens
+        Repository repository = new Repository(getApplication());
+        new Thread(() -> {
+            repository.getmAllCharacters();
+        }).start();
+
 
         Button readAlongButton = findViewById(R.id.readAlongButton);
         readAlongButton.setOnClickListener(new View.OnClickListener() {

@@ -29,7 +29,11 @@
 
             android:parentActivityName=".MainActivity" />
 
+        <activity android:name=".ui.theme.CharacterDetails"
+            android:screenOrientation="portrait"
+            android:exported="false"
 
+            android:parentActivityName=".CurrentChapterActivity" />
     </application>
 
 </manifest>

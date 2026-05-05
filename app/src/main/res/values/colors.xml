@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="chinese_red">#EE1C25</color>
+    <color name="chinese_yellow">#FFFF00</color>
+
 </resources>

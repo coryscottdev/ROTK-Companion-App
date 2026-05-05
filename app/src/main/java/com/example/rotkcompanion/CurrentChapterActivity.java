@@ -2,15 +2,26 @@ package com.example.rotkcompanion;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.rotkcompanion.Database.Repository;
+import com.example.rotkcompanion.Entities.CharacterEntity;
+import com.example.rotkcompanion.ui.theme.CharacterExpandableAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class CurrentChapterActivity extends AppCompatActivity {
+    Repository repository;
+    ExpandableListView expandableListView;
 
     Integer[] chapterNumbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
             22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
@@ -21,13 +32,47 @@ public class CurrentChapterActivity extends AppCompatActivity {
 
     String[] display = {"Characters", "Locations"};
 
+    private List<String> charGroupList; // headers
+    private Map<String, List<String>> charCollection;
 
+    private void createCharCollection() {
+        charGroupList = new ArrayList<>();
+        charCollection = new HashMap<>();
+
+        new Thread(() -> {
+            List<CharacterEntity> allChars = repository.getmAllCharacters();
+
+            runOnUiThread(() -> {
+                for (CharacterEntity character : allChars) {
+                    String name = character.getCharacterName();
+                    charGroupList.add(name);
+
+                    List<String> details = new ArrayList<>();
+                    details.add("Nickname Placeholder for " + name);
+                    details.add("(Current) Faction: Placeholder for " + name);
+                    details.add("More info/physical description Placeholder for " + name);
+                    details.add(name + "'s Story So Far...");
+                    charCollection.put(name, details);
+                }
+
+                CharacterExpandableAdapter adapter = new CharacterExpandableAdapter(
+                        this, charGroupList, charCollection);
+                expandableListView.setAdapter(adapter);
+            });
+        }).start();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_current_chapter);
+
+        repository = new Repository(getApplication());
+        expandableListView = findViewById(R.id.characterExpandable);
+
+        createCharCollection();
+
 
         Spinner chapterSelectSpinner = findViewById(R.id.chapterSelectSpinner);
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chapterNumbers);
@@ -44,5 +89,11 @@ public class CurrentChapterActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         displaySpinner.setAdapter(adapter3);
 
+
+
+
+
     }
+
+
 }
