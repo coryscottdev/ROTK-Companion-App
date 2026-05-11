@@ -1,9 +1,10 @@
-package com.example.rotkcompanion;
+package com.example.rotkcompanion.ui.theme;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rotkcompanion.Database.Repository;
+import com.example.rotkcompanion.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Repository repository = new Repository(getApplication());
         new Thread(() -> {
             repository.getmAllCharacters();
+            repository.getmAllChapters();
         }).start();
 
 
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
+        Spinner chapterSpinner = findViewById(R.id.chapterSelectSpinner);
 
 
     }

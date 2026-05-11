@@ -1,8 +1,9 @@
-package com.example.rotkcompanion;
+package com.example.rotkcompanion.ui.theme;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Spinner;
 
@@ -11,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rotkcompanion.Database.Repository;
 import com.example.rotkcompanion.Entities.CharacterEntity;
-import com.example.rotkcompanion.ui.theme.CharacterExpandableAdapter;
+import com.example.rotkcompanion.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class CurrentChapterActivity extends AppCompatActivity {
     Repository repository;
     ExpandableListView expandableListView;
+    int chapNumSelection;
+    CharacterExpandableAdapter expandableAdapter;
 
     Integer[] chapterNumbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
             22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
@@ -29,22 +32,28 @@ public class CurrentChapterActivity extends AppCompatActivity {
             76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102,
             103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120};
     String[] sortBy = {"Order of Appearance", "Alphabetical (A-Z)"};
-
     String[] display = {"Characters", "Locations"};
 
-    private List<String> charGroupList; // headers
+    private List<String> charGroupList;
     private Map<String, List<String>> charCollection;
 
     private void createCharCollection() {
-        charGroupList = new ArrayList<>();
-        charCollection = new HashMap<>();
-
         new Thread(() -> {
-            List<CharacterEntity> allChars = repository.getmAllCharacters();
+            List<Integer> charIDs = repository.getCharacterIDsByChapter(chapNumSelection);
+            List<String> names = new ArrayList<>();
+            for (int charID : charIDs) {
+                names.add(repository.getmCharacterNameByID(charID));
+            }
 
             runOnUiThread(() -> {
-                for (CharacterEntity character : allChars) {
-                    String name = character.getCharacterName();
+                String mentionedFactions = "Factions";
+                charGroupList.add(mentionedFactions);
+                List<String> myPH = new ArrayList<>();
+                myPH.add("Placeholder1");
+                myPH.add("Placeholder2");
+                charCollection.put(mentionedFactions, myPH);
+
+                for (String name : names) {
                     charGroupList.add(name);
 
                     List<String> details = new ArrayList<>();
@@ -55,9 +64,9 @@ public class CurrentChapterActivity extends AppCompatActivity {
                     charCollection.put(name, details);
                 }
 
-                CharacterExpandableAdapter adapter = new CharacterExpandableAdapter(
+                expandableAdapter = new CharacterExpandableAdapter(
                         this, charGroupList, charCollection);
-                expandableListView.setAdapter(adapter);
+                expandableListView.setAdapter(expandableAdapter);
             });
         }).start();
     }
@@ -71,13 +80,22 @@ public class CurrentChapterActivity extends AppCompatActivity {
         repository = new Repository(getApplication());
         expandableListView = findViewById(R.id.characterExpandable);
 
-        createCharCollection();
-
-
         Spinner chapterSelectSpinner = findViewById(R.id.chapterSelectSpinner);
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, chapterNumbers);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chapterSelectSpinner.setAdapter(adapter);
+        chapterSelectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapNumSelection = (int) parent.getItemAtPosition(position);
+                charGroupList = new ArrayList<>();
+                charCollection = new HashMap<>();
+                createCharCollection();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         Spinner sortBySpinner = findViewById(R.id.sortBySpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sortBy);
@@ -88,12 +106,5 @@ public class CurrentChapterActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, display);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         displaySpinner.setAdapter(adapter3);
-
-
-
-
-
     }
-
-
 }

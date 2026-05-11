@@ -7,23 +7,48 @@
     android:background="@color/chinese_red">
 
 
-    <TextView
-        android:id="@+id/chapterText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="1dp"
-        android:fontFamily="serif"
-        android:text="Chapter"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/chapterSelectSpinner"
-        app:layout_constraintEnd_toStartOf="@+id/displayText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--TODO fix Spinner Font-->
 
-    <!--TODO fix display text issue
-        TODO fix Spinner Font-->
+    <Spinner
+        android:id="@+id/displaySpinner"
+        android:layout_width="145dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="24dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/characterExpandable"
+        app:layout_constraintEnd_toStartOf="@+id/sortBySpinner"
+        app:layout_constraintStart_toEndOf="@+id/chapterSelectSpinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/chapterSelectSpinner"
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="25dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/characterExpandable"
+        app:layout_constraintEnd_toStartOf="@+id/displaySpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/sortBySpinner"
+        android:layout_width="145dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/characterExpandable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/displaySpinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/displayText"
@@ -55,46 +80,24 @@
         app:layout_constraintBottom_toTopOf="@+id/sortBySpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/displayText"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/chapterSelectSpinner"
-        android:layout_width="55dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="26dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/characterExpandable"
-        app:layout_constraintEnd_toStartOf="@+id/displaySpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/displaySpinner"
-        android:layout_width="145dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="24dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/characterExpandable"
-        app:layout_constraintEnd_toStartOf="@+id/sortBySpinner"
-        app:layout_constraintStart_toEndOf="@+id/chapterSelectSpinner"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Spinner
-        android:id="@+id/sortBySpinner"
-        android:layout_width="145dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/characterExpandable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/displaySpinner"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/chapterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="serif"
+        android:text="Chapter"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/chapterSelectSpinner"
+        app:layout_constraintEnd_toStartOf="@+id/displayText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ExpandableListView
         android:id="@+id/characterExpandable"

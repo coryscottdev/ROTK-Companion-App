@@ -1,6 +1,5 @@
 package com.example.rotkcompanion.DAO;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -27,4 +26,8 @@ public interface CharacterDAO {
 
     @Query("SELECT characterName FROM CharacterEntity WHERE characterID = :charID")
     String getmCharNameByID(int charID);
+
+    @Query("SELECT characterTitle FROM CharacterEntity WHERE characterID = :charID")
+    String getmCharTitleByID(int charID);
+
 }

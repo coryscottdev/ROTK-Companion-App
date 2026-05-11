@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ROTKCompanion">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.theme.MainActivity"
             android:exported="true"
             >
             <intent-filter>
@@ -23,17 +23,17 @@
         </activity>
 
         <activity
-            android:name=".CurrentChapterActivity"
+            android:name=".ui.theme.CurrentChapterActivity"
             android:screenOrientation="portrait"
             android:exported="false"
 
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".ui.theme.MainActivity" />
 
         <activity android:name=".ui.theme.CharacterDetails"
             android:screenOrientation="portrait"
             android:exported="false"
 
-            android:parentActivityName=".CurrentChapterActivity" />
+            android:parentActivityName=".ui.theme.CurrentChapterActivity" />
     </application>
 
 </manifest>

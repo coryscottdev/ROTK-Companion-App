@@ -11,6 +11,27 @@ public class CharacterEntity {
 
     private String characterName;
 
+    private String characterTitle;
+
+    public String getCharacterTitle() {
+        return characterTitle;
+    }
+
+    public void setCharacterTitle(String characterTitle) {
+        this.characterTitle = characterTitle;
+    }
+
+    public CharacterEntity(int characterID, String characterName) {
+        this.characterID = characterID;
+        this.characterName = characterName;
+    }
+    public CharacterEntity(int characterID, String characterName, String characterTitle) {
+        this.characterID = characterID;
+        this.characterName = characterName;
+        this.characterTitle = characterTitle;
+    }
+
+
     public int getCharacterID() {
         return characterID;
     }
@@ -29,9 +50,5 @@ public class CharacterEntity {
 
     public CharacterEntity() {
     }
-public CharacterEntity(int characterID, String characterName) {
-        this.characterID = characterID;
-        this.characterName = characterName;
-}
 
 }
