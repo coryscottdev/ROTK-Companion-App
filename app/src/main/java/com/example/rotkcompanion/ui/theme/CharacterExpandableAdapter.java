@@ -3,6 +3,10 @@ package com.example.rotkcompanion.ui.theme;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,9 +88,19 @@ public class CharacterExpandableAdapter extends BaseExpandableListAdapter {
 
         String detail = (String) getChild(groupPosition, childPosition);
         TextView detailView = convertView.findViewById(R.id.characterChildView);
-        detailView.setText(detail);
 
+        //Make any string with a colon bold, up to the colon
+        //Used for "Title:", "Faction", etc.
+        if (detail.contains(":")) {
+            int colonIndex = detail.indexOf(":") + 1;
+            SpannableString spannable = new SpannableString(detail);
+            spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, colonIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            detailView.setText(spannable);
+        } else {
+            detailView.setText(detail);
+        }
 
+        //Changes color of text to indicate a link
         if (detail.contains("Story So Far...")) {
             detailView.setTextColor(ContextCompat.getColor(context, R.color.chinese_yellow));
             detailView.setOnClickListener(v -> {

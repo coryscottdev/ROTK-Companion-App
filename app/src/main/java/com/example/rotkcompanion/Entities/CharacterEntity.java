@@ -12,6 +12,14 @@ public class CharacterEntity {
     private String characterName;
 
     private String characterTitle;
+    private String styleName;
+    public String getStyleName() {
+        return styleName;
+    }
+
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
+    }
 
     public String getCharacterTitle() {
         return characterTitle;
@@ -30,7 +38,12 @@ public class CharacterEntity {
         this.characterName = characterName;
         this.characterTitle = characterTitle;
     }
-
+    public CharacterEntity(int characterID, String characterName, String characterTitle, String styleName) {
+        this.characterID = characterID;
+        this.characterName = characterName;
+        this.characterTitle = characterTitle;
+        this.styleName = styleName;
+    }
 
     public int getCharacterID() {
         return characterID;

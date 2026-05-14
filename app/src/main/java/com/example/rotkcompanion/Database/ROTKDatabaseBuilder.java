@@ -7,16 +7,24 @@ import androidx.room.RoomDatabase;
 
 import com.example.rotkcompanion.DAO.ChapterDAO;
 import com.example.rotkcompanion.DAO.CharacterDAO;
+import com.example.rotkcompanion.DAO.CharacterFactionDAO;
 import com.example.rotkcompanion.DAO.FactionDAO;
+import com.example.rotkcompanion.DAO.NicknamesDAO;
 import com.example.rotkcompanion.Entities.ChapterEntity;
 import com.example.rotkcompanion.Entities.CharacterEntity;
+import com.example.rotkcompanion.Entities.CharacterFactionEntity;
 import com.example.rotkcompanion.Entities.FactionEntity;
+import com.example.rotkcompanion.Entities.NicknamesEntity;
 
-@Database(entities = {CharacterEntity.class, ChapterEntity.class, FactionEntity.class}, version = 7, exportSchema = false)
+@Database(entities = {CharacterEntity.class, ChapterEntity.class, FactionEntity.class, CharacterFactionEntity.class,
+NicknamesEntity.class},
+        version = 14, exportSchema = false)
 public abstract class ROTKDatabaseBuilder extends RoomDatabase {
     public abstract CharacterDAO characterDAO();
     public abstract ChapterDAO chapterDAO();
     public abstract FactionDAO factionDAO();
+    public abstract CharacterFactionDAO characterFactionDAO();
+    public abstract NicknamesDAO nicknamesDAO();
 
     public static volatile ROTKDatabaseBuilder INSTANCE;
 

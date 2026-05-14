@@ -1,15 +1,11 @@
 package com.example.rotkcompanion.ui.theme;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import com.example.rotkcompanion.R;
 
@@ -83,25 +79,6 @@ public class ChapterExpandableAdapter extends BaseExpandableListAdapter {
         TextView detailView = convertView.findViewById(R.id.detailsChildView);
         detailView.setText(detail);
 
-
-       /* if (detail.contains("Story So Far...")) {
-            detailView.setTextColor(ContextCompat.getColor(context, R.color.chinese_yellow));
-            detailView.setOnClickListener(v -> {
-                Intent intent = new Intent(context, CharacterDetails.class);
-
-                //TODO Change this later when implementing sorting
-                //Repository.getmCharacterNameByID(groupPosition + 1);
-                intent.putExtra("characterID", groupPosition + 1);
-                intent.putExtra("characterName", groupList.get(groupPosition));
-
-
-                context.startActivity(intent);
-            });
-        } else {
-            detailView.setOnClickListener(null);
-            detailView.setTextColor(Color.parseColor("#FFFFFF"));
-        }
-*/
 
         return convertView;
     }

@@ -1,7 +1,6 @@
 package com.example.rotkcompanion.Entities;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 @Entity(primaryKeys = {"chapterNum", "characterID"})
 public class ChapterEntity {

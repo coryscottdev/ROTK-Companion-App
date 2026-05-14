@@ -18,8 +18,8 @@ public interface CharacterDAO {
     @Update
     void update(CharacterEntity character);
 
-    @Query("SELECT characterName FROM CharacterEntity ORDER BY characterName ASC")
-    List<String> getmAllCharactersByNameASC();
+    @Query("SELECT characterName FROM CharacterEntity WHERE characterID = :charID ORDER BY characterName ASC")
+    String getmCharactersByNameASC(int charID);
 
     @Query("SELECT * FROM CharacterEntity ORDER BY characterName ASC")
     List<CharacterEntity> getmAllCharacters();
@@ -29,5 +29,8 @@ public interface CharacterDAO {
 
     @Query("SELECT characterTitle FROM CharacterEntity WHERE characterID = :charID")
     String getmCharTitleByID(int charID);
+
+    @Query("SELECT styleName FROM CharacterEntity WHERE characterID = :charID")
+    String getmCharStyleName(int charID);
 
 }
